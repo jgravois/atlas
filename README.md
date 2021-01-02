@@ -24,7 +24,7 @@ vaporware with a plan.
 * PostGIS
 * Svelte / Sapper?
 * Express
-* mapbox-gl-js/leaflet/whatever
+* leaflet
 * Docker?
 * Sequelize?
 
@@ -84,9 +84,8 @@ vaporware with a plan.
 ## done
 
 - [x] get docker containers running PostGIS/PGAdmin
-db files are supposedly saved locally (in /code/side projects/atlas-db)
 
-https://medium.com/spatial-data-science/how-to-install-postgis-and-pgadmin4-with-docker-easily-3f4cb3551bef
+followed [these instructions](https://medium.com/spatial-data-science/how-to-install-postgis-and-pgadmin4-with-docker-easily-3f4cb3551bef). db files are supposedly saved locally (in /code/side projects/atlas-db)
 
 ```
 docker run --publish 5433:5433 --volume=pgvolume:/pgdata --env-file=pg-env.list --name=postgres --hostname=postgres --network=pgnetwork --detach crunchydata/crunchy-postgres-gis:centos7-12.5-3.0-4.5.1
@@ -94,14 +93,18 @@ docker run --publish 5433:5433 --volume=pgvolume:/pgdata --env-file=pg-env.list 
 docker run --publish 5050:5050 --volume=pga4volume:/var/lib/pgadmin --env-file=pgadmin-env.list --name=pgadmin4 --hostname=pgadmin4 --network=pgnetwork --detach crunchydata/crunchy-pgadmin4:centos7-12.5-4.5.1
 ```
 
+- [x] create boilerplate sapper app with a leaflet map ([`atlas@a879111`](https://github.com/jgravois/atlas/commit/a87911123d58c9f1ca870b74d5c2f0efb1444501))
+
+- [x] get sequelize talking to PostGIS - ([`atlas-db@680cd8c`](https://github.com/jgravois/atlas-db/commit/680cd8c8c27726fc0413c8f424ed820686b0bc7f))
+
+followed [these instructions](https://naysan.ca/2020/07/26/upload-a-shapefile-into-a-postgis-table-using-qgis/) to load a dummy shapefile in first
+
 ## `TODO:` now
 
 - [] sketch out db schema
-- [] articulate schema in a db migration
-- [] load minimal dummy data in a db migration
-- [] get sequelize/express talking to PostGIS
-- [] create a route to query out the dummy data as geojson
-- [] create boilerplate sapper app with a leaflet map
+- [] articulate schema and load dummy data in a migration/seed files
+- [] create an express route to query out geojson
+
 - [] figure out how to manage state in sapper
 - [] do something 'reactive'
 - [] move db information to enviroment variables
