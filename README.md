@@ -8,10 +8,10 @@ i've never made it more than a couple pages into a journal. hopefully my persona
 
 ## status
 
-vaporware with a plan.
+vaporware (with a plan).
 
 ## front end routes
-* `/` - the map (displays "about" once)
+* `/` - the map (displays "welcome" once)
 * `/:date/to/:date` - filtered map
 * `/:user` - specific user's map
 * `/:user/:id` - display a record
@@ -19,21 +19,12 @@ vaporware with a plan.
 * `/:user/:id#edit` - existing record
 * `/about` - explanation
 
-## deps
-
-* PostGIS
-* Svelte / Sapper?
-* Express
-* leaflet
-* Docker?
-* Sequelize?
-
 ## data
 
-* raw EXIF photos
-* freehand points
+* drag/drop raw EXIF photos
+* freehand geometries
 * GPX lines/polygons
-* longform text (including embedded external images/emoji)
+* longform markdown text
 
 ## db schema
 
@@ -41,51 +32,51 @@ vaporware with a plan.
 * 1:m record/photo relationship
 
 ### columns
-* uuid
+* uuid or integer
 * timestamp
 * geometry
 * markdown
-* blob?
 * createdAt
 * updatedAt
+* blob?
 
 ## API routes
 
-* `GET /all` - everything and the kitchen sink
-* `PUT /:id` - insert a new record
-* `POST /:id` - update an existing record
-* `GET /:id/next` - chronologically
-* `GET /:id/previous` - chronologically
-* `GET /` - version etc.
-* `GET /ping` - PONG
+- [x] `GET /journal-entries` - list everything
+- [x] `POST /journal-entries` - insert a new record
+- [x] `GET /journal-entries/:id` - fetch a single record
+- [x] `PUT /journal-entries/:id` - update an existing record
+- [x] `DELETE /journal-entries/:id` - delete an existing record (needs auth)
+- [ ] `GET /:id/next` - chronologically
+- [ ] `GET /:id/previous` - chronologically
+- [ ] `GET /` - version etc.
+- [ ] `GET /ping` - PONG
 
 ## v1
-* mobile friendly
+* mobile friendly (evergreen browsers only)
 * renders markdown
-* date picker / slider
-* create a new point
+* create points
 * geocoder
-* evergreen browsers only
 * figure out how to deploy it
 
 ## v2
+* date picker / slider
 * supercluster? / vector tiles?
-* optional auth
+* auth
 * edit existing features
 * drag and drop GPX/EXIF
-* tests
+* fuzzy dates (ie. user can convey how uncertain they are about the date they enter)
 
 ## v?
 * `/random` - surprise
-* ProseMirror (or similar) rich editor
-* fuzzy dates (ie. i dont know when something happened)
+* ProseMirror (or similar) rich editor?
 * ?
 
 ## done
 
 - [x] get docker containers running PostGIS/PGAdmin
 
-followed [these instructions](https://medium.com/spatial-data-science/how-to-install-postgis-and-pgadmin4-with-docker-easily-3f4cb3551bef). db files are supposedly saved locally (in /code/side projects/atlas-db)
+followed [these instructions](https://medium.com/spatial-data-science/how-to-install-postgis-and-pgadmin4-with-docker-easily-3f4cb3551bef). not sure how to persist the db yet.
 
 ```
 docker run --publish 5433:5433 --volume=pgvolume:/pgdata --env-file=pg-env.list --name=postgres --hostname=postgres --network=pgnetwork --detach crunchydata/crunchy-postgres-gis:centos7-12.5-3.0-4.5.1
@@ -95,24 +86,25 @@ docker run --publish 5050:5050 --volume=pga4volume:/var/lib/pgadmin --env-file=p
 
 - [x] create boilerplate sapper app with a leaflet map ([`atlas@a879111`](https://github.com/jgravois/atlas/commit/a87911123d58c9f1ca870b74d5c2f0efb1444501))
 - [x] move db information to enviroment variables
-- [x] get sequelize talking to PostGIS - ([`atlas-db@680cd8c`](https://github.com/jgravois/atlas-db/commit/680cd8c8c27726fc0413c8f424ed820686b0bc7f))
+- [x] get sequelize talking to PostGIS ([`atlas-db@680cd8c`](https://github.com/jgravois/atlas-db/commit/680cd8c8c27726fc0413c8f424ed820686b0bc7f))
 
 followed [these instructions](https://naysan.ca/2020/07/26/upload-a-shapefile-into-a-postgis-table-using-qgis/) to load a dummy shapefile in first
 
-- [x] create an express route to query out geojson
+- [x] create a back end route to LIST geojson
 
 found a [helper library](https://github.com/tommybananas/finale) that scaffolds out a basic REST API from a Sequelize model with minimal boilerplate. Its compatible with Express too, but i started with [restify](https://github.com/restify/node-restify).
 
-## `TODO:` now
+## `TODO:`
 
-- [] sketch out db schema
-- [] articulate schema and load dummy data in a migration/seed files
-- [] come up with a layout for the app
-- [] figure out how to manage state in sapper
-- [] do something 'reactive'
+- [ ] sketch out db schema
+- [ ] articulate schema and load dummy data in a migration/seed files
+- [ ] come up with a layout for the app
+- [ ] figure out how to render markdown
+- [ ] figure out how to manage state in sapper
+- [ ] do something 'reactive'
 
 ## `TODO:` later
 
-- [] use a service to deploy the thing
-- [] roll some auth
+- [ ] use a service to deploy the thing
+- [ ] roll some auth
 
