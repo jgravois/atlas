@@ -94,20 +94,22 @@ docker run --publish 5050:5050 --volume=pga4volume:/var/lib/pgadmin --env-file=p
 ```
 
 - [x] create boilerplate sapper app with a leaflet map ([`atlas@a879111`](https://github.com/jgravois/atlas/commit/a87911123d58c9f1ca870b74d5c2f0efb1444501))
-
+- [x] move db information to enviroment variables
 - [x] get sequelize talking to PostGIS - ([`atlas-db@680cd8c`](https://github.com/jgravois/atlas-db/commit/680cd8c8c27726fc0413c8f424ed820686b0bc7f))
 
 followed [these instructions](https://naysan.ca/2020/07/26/upload-a-shapefile-into-a-postgis-table-using-qgis/) to load a dummy shapefile in first
+
+- [x] create an express route to query out geojson
+
+found a [helper library](https://github.com/tommybananas/finale) that scaffolds out a basic REST API from a Sequelize model with minimal boilerplate. Its compatible with Express too, but i started with [restify](https://github.com/restify/node-restify).
 
 ## `TODO:` now
 
 - [] sketch out db schema
 - [] articulate schema and load dummy data in a migration/seed files
-- [] create an express route to query out geojson
-
+- [] come up with a layout for the app
 - [] figure out how to manage state in sapper
 - [] do something 'reactive'
-- [] move db information to enviroment variables
 
 ## `TODO:` later
 

@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount } from 'svelte'
 
   // no 'window' server-side
 	onMount(async () => {
@@ -8,9 +8,22 @@
     const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 	  const attribution = '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
 
-		const map = L.map('map').setView([37.75, -122.23], 10)
+		const map = L.map('map').setView([38, -97], 4)
 		L.tileLayer(url, { attribution }).addTo(map)
-	});
+
+		// everything and the kitchen sink
+		const res = await fetch('http://localhost:3001/journal-entries')
+		const journalEntries = await res.json()
+		const geojson = journalEntries.map(e => {
+			return {
+				type: "Feature",
+				geometry: e.geom,
+				properties: {	memo: e.memo }
+			}
+		})
+
+		L.geoJSON(geojson).addTo(map)
+	})
 </script>
 
 <style></style>
