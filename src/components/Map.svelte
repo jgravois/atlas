@@ -12,7 +12,7 @@
 		L.tileLayer(url, { attribution }).addTo(map)
 
 		// everything and the kitchen sink
-		const res = await fetch('http://localhost:3001/journal-entries')
+		const res = await fetch('http://localhost:3001/journals')
 		const journalEntries = await res.json()
 		const geojson = journalEntries.map(e => {
 			return {
