@@ -94,14 +94,13 @@ followed [these instructions](https://naysan.ca/2020/07/26/upload-a-shapefile-in
 
 found a [helper library](https://github.com/tommybananas/finale) that scaffolds out a basic REST API from a Sequelize model with minimal boilerplate. Its compatible with Express too, but i started with [restify](https://github.com/restify/node-restify).
 
+- [x] articulate schema in a migration and load data in a seed file ([`atlas-db@826fa25`](https://github.com/jgravois/atlas-db/commit/826fa25949fac6b9409c0172363622561418ba65))
+
 ## `TODO:`
 
-- [ ] sketch out db schema
-- [ ] articulate schema and load dummy data in a migration/seed files
-- [ ] come up with a layout for the app
+- [ ] sort out a layout for the app
 - [ ] figure out how to render markdown
-- [ ] figure out how to manage state in sapper
-- [ ] do something 'reactive'
+- [ ] do something 'reactive' and manage state in sapper
 
 ## `TODO:` later
 
